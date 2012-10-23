@@ -34,42 +34,39 @@ import java.net.URL;
 import java.util.logging.Logger;
 
 public class FetchSource {
-	
-	
 
-	protected static String fetchSource(URL website, Logger l, String prefix){
-	    InputStream is = null;
-	    DataInputStream dis = null;
-	    String s, source = "";
+    protected static String fetchSource(URL website, Logger l, String prefix) {
+        InputStream is = null;
+        DataInputStream dis = null;
+        String s, source = "";
 
-		try {
-			is = website.openStream();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			l.info("[AU]" + prefix + " Error opening URL input stream!");
-		}
-		
-	    dis = new DataInputStream(new BufferedInputStream(is));
-		BufferedReader br = new BufferedReader(new InputStreamReader(dis));
-		
-		try {
-			while ((s = br.readLine()) != null) {
-			    source += s;
-			 }
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			l.info("[AU]" + prefix + " Error reading input stream!");
-		}
-		
-		try {
+        try {
+            is = website.openStream();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            l.info("[AU]" + prefix + " Error opening URL input stream!");
+        }
+
+        dis = new DataInputStream(new BufferedInputStream(is));
+        BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+
+        try {
+            while ((s = br.readLine()) != null) {
+                source += s;
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            l.info("[AU]" + prefix + " Error reading input stream!");
+        }
+
+        try {
             is.close();
-         } catch (IOException ioe) {
-        	 ioe.printStackTrace();
-        	 l.info("[AU]" + prefix + " Error closing URL input stream!");
-         }
-         
-		return source;
-	}
-	
-	
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            l.info("[AU]" + prefix + " Error closing URL input stream!");
+        }
+
+        return source;
+    }
+
 }
