@@ -132,6 +132,8 @@ public class DynamicEconomy extends JavaPlugin {
 
     static Logger                              log             = Logger.getLogger("Minecraft");
 
+    public static DynamicEconomy instance;
+
     /**
      * @param args
      *            the command line arguments
@@ -139,8 +141,12 @@ public class DynamicEconomy extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        instance = this;
+
         PluginManager pm = this.getServer().getPluginManager();
         PluginDescriptionFile pdf = pm.getPlugin("DynamicEconomy").getDescription();
+
+
 
         plugin = this;
 
@@ -577,6 +583,11 @@ public class DynamicEconomy extends JavaPlugin {
         signInvalidColor = config.getString("sign-invalid-color", "&c");
         groupControl = config.getBoolean("group-control", false);
         useRegionFlags = config.getBoolean("use-region-flags", true);
+
+        try {
+            config.save(DynamicEconomy.configFile);
+        }
+        catch(Exception e){}
 
         Messages.getMessages();
         dataSigns.updateTaxSigns();
