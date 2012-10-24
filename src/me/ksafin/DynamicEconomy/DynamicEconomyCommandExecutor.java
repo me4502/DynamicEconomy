@@ -1102,6 +1102,9 @@ public class DynamicEconomyCommandExecutor implements org.bukkit.command.Command
         World world = player.getWorld();
         String worldName = world.getName();
 
+        if(!DynamicEconomy.restrictWorlds)
+            return true;
+
         for (String worldIndex : DynamicEconomy.dyneconWorld) {
             if (worldName.equalsIgnoreCase(worldIndex)) return true;
         }
